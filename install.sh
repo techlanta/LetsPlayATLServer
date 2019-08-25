@@ -1,1 +1,2 @@
-pip install -f requirements.txt
+
+conda env create -f env.yaml
