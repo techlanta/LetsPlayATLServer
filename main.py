@@ -1,25 +1,15 @@
 from flask import Flask, request, jsonify
-from git import Repo
-import controllers.events_controller as events_c
+from flask_sqlalchemy import SQLAlchemy
+
+
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://localhost:3306'
+db = SQLAlchemy(app)
 
-repo = Repo()
 
-@app.route("/health")
-def health():
-    return "OK"
-
-@app.route("/version")
-def version():
-    global repo
-    sha = repo.head.object.hexsha
-    return repo.git.rev_parse(sha, short=8)
-
-@app.route("/events", methods=['POST'])
-def events():
-    content = request.json #only works if content type is application/json
-    return jsonify(events_c.create(content["name"]))
-
+from controllers.status_controller import *
+from controllers.events_controller import *
+from controllers.user_controller import *
 
 if __name__ == '__main__':
     app.run(host= '0.0.0.0',debug=True)
