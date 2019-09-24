@@ -1,10 +1,13 @@
 from main import app, db
 from models.event import Event
+from flask import request, jsonify
 
-@app.route("/events", methods=['POST'])
+@app.route("/event", methods=['POST'])
 def events():
-    event = Event(event_name="Momo's community block party")
+    content = request.json #only works if content type is application/json
+    name = content["name"]
+    event = Event(event_name=name)
     db.session.add(event)
     db.session.commit()
-    content = request.json #only works if content type is application/json
-    return jsonify(events_c.create(content["name"]))
+
+    return jsonify({"status": "completed", "event": {"name": name, "id": event.id}})

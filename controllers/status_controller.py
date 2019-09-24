@@ -8,8 +8,10 @@ def health():
     return "OK"
 
 @app.route("/reset")
-def reset_db():
+def reset():
+    db.drop_all()
     db.create_all()
+    return {"status": "completed"}
 
 @app.route("/version")
 def version():
