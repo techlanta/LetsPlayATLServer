@@ -6,8 +6,8 @@ from flask import request, jsonify
 def events():
     content = request.json #only works if content type is application/json
     name = content["name"]
-    event = Event(event_name=name)
+    event = Event(name=name)
     db.session.add(event)
     db.session.commit()
 
-    return jsonify({"status": "completed", "event": {"name": name, "id": event.id}})
+    return jsonify({"status": "created", "event": {"name": name, "id": event.id}})
