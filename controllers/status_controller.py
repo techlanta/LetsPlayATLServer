@@ -7,6 +7,16 @@ repo = Repo()
 def health():
     return "OK"
 
+@app.route("/drop_all")
+def drop_all():
+    db.drop_all()
+    return {"status": "completed"}
+
+@app.route("/reset_all")
+def reset_all():
+    db.create_all()
+    return {"status": "completed"}
+
 @app.route("/reset")
 def reset():
     db.drop_all()

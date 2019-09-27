@@ -1,19 +1,24 @@
-from main import app, db
+from main import app, db, auth
 from git import Repo
+from flask import request, jsonify
+from models.user import User
+
 
 repo = Repo()
 
 
-@app.route("/login", methods=["POST"])
-def login():
-    return "NOT IMPLEMENTED"
-
+@app.route("/check_password", methods=["GET"])
+@auth.login_required
+def check_password():
+    return jsonify({"status": "request went through"})
 @app.route("/user", methods=['POST'])
-def events():
+def create_user():
     content = request.json #only works if content type is application/json
-    name = content["name"]
-    user = User(name=name)
+    name = content["username"]
+    pwd = content["password"]
+    user = User(username=name)
+    user.set_password(pwd)
     db.session.add(user)
     db.session.commit()
 
-    return jsonify({"status": "created", "user": {"name": name, "id": user.id}})
+    return jsonify({"status": "created", "user": {"name": user.username}})
