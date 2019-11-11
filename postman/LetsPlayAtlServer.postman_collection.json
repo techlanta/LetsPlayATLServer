@@ -1,0 +1,122 @@
+{
+	"info": {
+		"_postman_id": "abb417cd-4473-46ad-a618-49af5b4d5106",
+		"name": "LetsPlayAtlServer",
+		"description": "Used for Python Flask Server\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "health check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/health",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"health"
+					]
+				},
+				"description": "is server running?"
+			},
+			"response": []
+		},
+		{
+			"name": "version check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/version",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"version"
+					]
+				},
+				"description": "what is git version?"
+			},
+			"response": []
+		},
+		{
+			"name": "create event",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\":\"new event\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/events",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"events"
+					]
+				},
+				"description": "make an event\n"
+			},
+			"response": []
+		},
+		{
+			"name": "get event info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/events",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"events"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "db973378-c9a9-43e2-8bd2-2220dad4cd3a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "d0eceeda-f66f-48f3-bcc5-438e79bd5b2d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "cdd58d37-d39f-48c7-a366-03f048131e1e",
+			"key": "baseUrl",
+			"value": "localhost:5000",
+			"type": "string"
+		}
+	]
+}
