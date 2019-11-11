@@ -1,11 +1,16 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from main import db, auth
+from models import event
 
 
 class User(db.Model):
     username = db.Column(db.String(20), nullable=False, primary_key=True)
+    fullname = db.Column(db.String(128))
     creator = db.relationship("Event")
     password_hash = db.Column(db.String(128))
+    is_admin = db.Column(db.Boolean, nullable=False)
+    reservations = db.relationship(event.Event,
+                        secondary=event.event_rsvps)
 
 
     def set_password(self, password):
